@@ -14,7 +14,6 @@ var PolymerExtend = (function () {
         _class = arguments[1];
       }
       this.class[name] = _class;
-      console.log(name, _class);
 
       if (_class.is) {
         Polymer(_class);

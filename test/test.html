@@ -13,14 +13,14 @@
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded',function() {
    PolymerExtend('BaseElement', {
-      ready: function() {
+      setBase: function() {
         return true;
       }
     });
 
     PolymerExtend('MyElement1','BaseElement', {
         getExample: function (){
-          return this.ready();
+          return this.setBase();
         }
     });
 
@@ -31,15 +31,19 @@ document.addEventListener('DOMContentLoaded',function() {
       is: 'my-element',
         getMultiple: function (){
           return this.getExample();
+        },
+        ready:function(){
+          this.textContent = 'hello world';
         }
+
     });
 
     describe('PolymerExtend', function() {
       it('Stores BaseElement as a class in PolymerExtend.class with no inheritance', function() {
         assert(PolymerExtend.class.BaseElement);
       });
-      it('BaseElement contains ready method', function() {
-        assert(PolymerExtend.class.BaseElement.ready);
+      it('BaseElement contains setBase method', function() {
+        assert(PolymerExtend.class.BaseElement.setBase);
       });
       it('BaseElement not registered as a component', function() {
         var construct = document.createElement('base-element').constructor;
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded',function() {
         assert(PolymerExtend.class.MyElement1);
       });
       it('MyElement1 inherits from BaseElement', function() {
-        assert(PolymerExtend.class.MyElement1.ready);
+        assert(PolymerExtend.class.MyElement1.setBase);
       });
       it('MyElement1 contains its own functions', function() {
         assert(PolymerExtend.class.MyElement1.getExample);
@@ -66,23 +70,27 @@ document.addEventListener('DOMContentLoaded',function() {
         assert(PolymerExtend.class.MyElement2);
       });
       it('MyElement2 inherits from BaseElement', function() {
-        assert(PolymerExtend.class.MyElement2.ready);
+        assert(PolymerExtend.class.MyElement2.setBase);
       });
       it('MyElement3 contains its own functions', function() {
         assert(PolymerExtend.class.MyElement3.getMultiple);
       });
       it('MyElement3 inherits from BaseElement', function() {
-        assert(PolymerExtend.class.MyElement3.ready);
+        assert(PolymerExtend.class.MyElement3.setBase);
       });
       it('MyElement3 calls inherited method', function() {
         var isReady = PolymerExtend.class.MyElement3.getMultiple();
         assert.equal(isReady,true);
       });
+      it('MyElement3 is created as an element', function() {
+        var element = document.querySelector('my-element');
+        assert.equal(element.textContent,'hello world');
+      });
     });
   });
   </script>
 <body>
-
+<my-element></my-element>
 </body>
 
 </html>
