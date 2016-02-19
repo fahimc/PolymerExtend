@@ -10,14 +10,79 @@
   <script src="../PolymerExtend.js"></script>
   <link rel="import" href="../bower_components/polymer/polymer.html">
 </head>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',function() {
+   PolymerExtend('BaseElement', {
+      ready: function() {
+        return true;
+      }
+    });
 
-<body>
-  <jet-app appid="opal-recent-developments-tests" apptitle="opal-recent-developments unit tests" enablethemes="true">
-    <opal-recent-developments id="static-data"></opal-recent-developments>
-  </jet-app>
-  <script type="text/javascript">
-  (function () {
-  })();
+    PolymerExtend('MyElement1','BaseElement', {
+        getExample: function (){
+          return this.ready();
+        }
+    });
+
+    PolymerExtend('MyElement2',['BaseElement'], {
+    });
+
+    PolymerExtend('MyElement3',['BaseElement','MyElement1'], {
+      is: 'my-element',
+        getMultiple: function (){
+          return this.getExample();
+        }
+    });
+
+    describe('PolymerExtend', function() {
+      it('Stores BaseElement as a class in PolymerExtend.class with no inheritance', function() {
+        assert(PolymerExtend.class.BaseElement);
+      });
+      it('BaseElement contains ready method', function() {
+        assert(PolymerExtend.class.BaseElement.ready);
+      });
+      it('BaseElement not registered as a component', function() {
+        var construct = document.createElement('base-element').constructor;
+        assert.equal(construct,HTMLElement);
+      });
+      it('MyElement1 is in class list when inheritance as a string argument', function() {
+        assert(PolymerExtend.class.MyElement1);
+      });
+      it('MyElement1 inherits from BaseElement', function() {
+        assert(PolymerExtend.class.MyElement1.ready);
+      });
+      it('MyElement1 contains its own functions', function() {
+        assert(PolymerExtend.class.MyElement1.getExample);
+      });
+      it('MyElement1 calls inherited method', function() {
+        var isReady = PolymerExtend.class.MyElement1.getExample();
+        assert.equal(isReady,true);
+      });
+      it('MyElement1 not registered as a component', function() {
+        var construct = document.createElement('my-element-1').constructor;
+        assert.equal(construct,HTMLElement);
+      });
+      it('Stores MyElement2 class in PolymerExtend.class with an array as the inheritance arguement', function() {
+        assert(PolymerExtend.class.MyElement2);
+      });
+      it('MyElement2 inherits from BaseElement', function() {
+        assert(PolymerExtend.class.MyElement2.ready);
+      });
+      it('MyElement3 contains its own functions', function() {
+        assert(PolymerExtend.class.MyElement3.getMultiple);
+      });
+      it('MyElement3 inherits from BaseElement', function() {
+        assert(PolymerExtend.class.MyElement3.ready);
+      });
+      it('MyElement3 calls inherited method', function() {
+        var isReady = PolymerExtend.class.MyElement3.getMultiple();
+        assert.equal(isReady,true);
+      });
+    });
+  });
   </script>
-  </body>
-  </html>
+<body>
+
+</body>
+
+</html>
