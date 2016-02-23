@@ -1,0 +1,28 @@
+{
+  "name": "PolymerExtend",
+  "main": "PolymerExtend.js",
+  "homepage": "https://github.com/fahimc/PolymerExtend",
+  "authors": [
+    "Fahim Chowdhury <fahim.chowdhury1985@gmail.com>"
+  ],
+  "description": "Create inheritable Classes in Polymer with PolymerExtend wrapper",
+  "moduleType": [],
+  "keywords": [
+    "polymer",
+    "polymerextend",
+    "extend",
+    "oop"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "polymer#^1.0",
+    "web-component-tester": "*"
+  }
+}
