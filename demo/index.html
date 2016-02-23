@@ -11,6 +11,9 @@
 	PolymerExtend('BaseElement',{
 		getMessage:function () {
 			console.log('message from parent');
+		},
+		getOther: function (){
+			this.textContent += ' and this message is from the base class';
 		}
 	});
 
@@ -18,11 +21,15 @@
 		is:'my-element',
 		ready:function () {
 			console.log('ready');
+			this.getMessage();
+			this.getOther();
 		},
 		getMessage: function () {
 			console.log('message from child');
+			this.textContent = 'This is inherited from BaseElement';
 		}
 	});
 </script>
+<my-element></my-element>
 </body>
 </html>

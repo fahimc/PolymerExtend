@@ -22,7 +22,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0",
+    "polymer": "polymer#^1.0",
     "web-component-tester": "*"
   }
 }
