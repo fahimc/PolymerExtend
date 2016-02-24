@@ -96,7 +96,7 @@ PolymerExtend('MyElement',['BaseElement'],{
 
 If you want to call the base class method you can use the `call`/`apply` method as you would in vanilla js using the classes stored in PolymerExtend.
 
-```
+```js
 PolymerExtend('MyElement',['BaseElement'],{
 		getMessage: function () {
 			console.log('overrides parent method');
